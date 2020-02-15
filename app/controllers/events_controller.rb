@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  # before_action :print_test
   before_action :find_event, only: [:show,:edit,:update,:destroy]
 
 
@@ -7,7 +8,7 @@ class EventsController < ApplicationController
   end
 
   def show
-  
+    @event = Event.find(params[:id])
     
   end
 
@@ -21,6 +22,7 @@ class EventsController < ApplicationController
       redirect_to @event
     else
       render :new
+    end
   end
 
   def edit
@@ -34,6 +36,7 @@ class EventsController < ApplicationController
   def destroy
     
   end
+  
 
   private
 
@@ -44,7 +47,6 @@ class EventsController < ApplicationController
 
   def find_event
     @event = Event.find(params[:id])
-    
   end
 
 end
