@@ -1,8 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit , :update, :destroy]
-  before_action :authorize_user!, only: [:update, :edit, :destroy]
-  # before_action :print_test
   before_action :find_event, only: [:show,:edit,:update,:destroy]
+  before_action :authorize_user!, only: [:update, :edit, :destroy]
 
 
   def index
@@ -20,6 +19,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    @event.user_id = current_user.id
     if(@event.save)
       redirect_to @event
     else
@@ -59,8 +59,8 @@ class EventsController < ApplicationController
   end
 
   def authorize_user!
-    return true if current_user
-    
+    return true if current_user.id == @event.user_id   
   end
+
 
 end

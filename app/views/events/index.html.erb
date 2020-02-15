@@ -9,9 +9,9 @@
   <p>
     <%= event.name %> |
     <%= link_to 'View', event_path(event) %> |
-    <% if user_signed_in? %>
-    <%= link_to 'Edit', edit_event_path(event) %> |
-    <%= link_to 'Delete', event_path(event), method: :delete, data: {confirm: 'You Sure Bro?'} %> |
+    <% if user_signed_in? && event.user_id == current_user.id %>
+      <%= link_to 'Edit', edit_event_path(event) %> |
+      <%= link_to 'Delete', event_path(event), method: :delete, data: {confirm: 'You Sure Bro?'} %> |
     <% end %>
   </p>
 <% end %>
