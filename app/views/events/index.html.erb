@@ -1,11 +1,17 @@
 <h1>ALL EVENTS</h1>
+    <% if user_signed_in? %>
+    <%= link_to 'New Event', new_event_path %>
+    <% end %>
+
 
 
 <% @events.each do |event| %>
   <p>
     <%= event.name %> |
     <%= link_to 'View', event_path(event) %> |
+    <% if user_signed_in? %>
     <%= link_to 'Edit', edit_event_path(event) %> |
     <%= link_to 'Delete', event_path(event), method: :delete, data: {confirm: 'You Sure Bro?'} %> |
+    <% end %>
   </p>
 <% end %>
