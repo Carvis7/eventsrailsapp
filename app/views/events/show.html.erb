@@ -2,4 +2,11 @@
 <h1><%= @event.location %></h1>
 <p><%= @event.notes %></p>
 
+<h2>Attendees</h2>
+  <ul>
+    <% @event.attendances.each do |attendance| %>
+      <li><%= attendance.user.email %></li>
+    <% end %>
+  </ul>
+
 <%= link_to 'Back', events_path %>

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit , :update, :destroy]
-  before_action :find_event, only: [:show,:edit,:update,:destroy]
+  before_action :find_event, only: [:edit,:update,:destroy]
   before_action :authorize_user!, only: [:update, :edit, :destroy]
 
 
@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.includes(attendances:[:user]).find(params[:id])
     
   end
 
